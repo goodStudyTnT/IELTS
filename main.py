@@ -10,10 +10,15 @@ def chose_file():
     dir = os.fsdecode(dir)
 
     idx_to_filename = {}
+    files = []
     for idx, file in enumerate(os.listdir(dir)):
         filename = os.fsdecode(file)
-        idx_to_filename[idx + 1] = filename
-        print(f"{idx + 1}): {filename}")
+        files.append(filename)
+
+    files.sort()
+    for idx, file in enumerate(files):
+        idx_to_filename[idx + 1] = file
+        print(f"{idx + 1}): {file}")
     ans = int(input())
     return idx_to_filename[ans]
 
@@ -30,7 +35,7 @@ if __name__ == '__main__':
     for line in lines:
         while True:
             try:
-                tts = gTTS(text=line, lang=language)
+                tts = gTTS(text=line, lang=language, tld='co.uk')
                 tts.save('speech.mp3')
                 playsound('speech.mp3')
                 break
