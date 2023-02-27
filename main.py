@@ -31,6 +31,7 @@ if __name__ == '__main__':
         lines = [line.rstrip() for line in file]
 
     print("现在开始听写...")
+    time.sleep(5)
     language = 'en'
     for line in lines:
         while True:
@@ -43,7 +44,7 @@ if __name__ == '__main__':
                 print("error, try again...")
                 time.sleep(1)
 
-        time.sleep(1)
+        time.sleep(3)
 
     print("现在开始记录错误单词, 正确 y，错误 n。")
     error_line = []
@@ -56,6 +57,9 @@ if __name__ == '__main__':
     if len(error_line) == 0:
         print("耶，没有错误！")
     else:
+        flag = input("是否生成错误本？[y]: ") or "y"
+        if flag != "y":
+            exit(0)
         print("生成错误本中...")
         tmp = file_name.split('_')
         if len(tmp) == 1:
