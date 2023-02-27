@@ -1,5 +1,7 @@
 import os
-import pyttsx3
+from gtts import gTTS
+from playsound import playsound
+import time
 
 
 def chose_file():
@@ -24,10 +26,19 @@ if __name__ == '__main__':
         lines = [line.rstrip() for line in file]
 
     print("现在开始听写...")
-    engine = pyttsx3.init()
+    language = 'en'
     for line in lines:
-        engine.say(line)
-        engine.runAndWait()
+        while True:
+            try:
+                tts = gTTS(text=line, lang=language)
+                tts.save('speech.mp3')
+                playsound('speech.mp3')
+                break
+            except:
+                print("error, try again...")
+                time.sleep(1)
+
+        time.sleep(1)
 
     print("现在开始记录错误单词, 正确 y，错误 n。")
     error_line = []
